@@ -16,13 +16,16 @@ class Ship:
 		self.rect = self.image.get_rect()
 
 		#starting position of the ship
-		self.rect.midbottom = self.screen_rect.midbottom
+		self.rect.center = self.screen_rect.center
 
 		#change position of the ship to float data type
 		self.x = float(self.rect.x)
+		self.y = float(self.rect.y)
 
 		self.moving_right = False
 		self.moving_left = False
+		self.moving_down = False
+		self.moving_up = False
 
 	def update(self):
 		"""Update the position of the ship."""
@@ -30,9 +33,14 @@ class Ship:
 			self.x += self.settings.ship_speed
 		if self.moving_left and self.rect.left > 0:
 			self.x -= self.settings.ship_speed
+		if self.moving_down and self.rect.bottom < self.screen_rect.bottom:
+			self.y += self.settings.ship_speed
+		if self.moving_up and self.rect.top > 0:
+			self.y -= self.settings.ship_speed
 
 		#update rect base on self.x
 		self.rect.x = self.x
+		self.rect.y = self.y
 
 	def blitme(self):
 		"""Display ship in the actual position."""
