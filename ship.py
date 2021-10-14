@@ -16,7 +16,7 @@ class Ship:
 		self.rect = self.image.get_rect()
 
 		#starting position of the ship
-		self.rect.center = self.screen_rect.center
+		self.rect.midbottom = self.screen_rect.midbottom
 
 		#change position of the ship to float data type
 		self.x = float(self.rect.x)
