@@ -11,10 +11,21 @@ class Button():
 		self.button_color = (0, 255, 0)
 		self.text_color = (255, 255, 255)
 		self.font = pygame.font.SysFont(None, 48)
+		self.interspace = 50
+		self.easy_width, self.easy_height = self.screen_rect.center[0] - self.width - self.interspace, self.screen_rect.center[1]
+		self.hard_width, self.hard_height = self.screen_rect.center[0] + self.width + self.interspace, self.screen_rect.center[1]
 
 		#Create button and adjust to mid
 		self.rect = pygame.Rect(0, 0, self.width, self.height)
-		self.rect.center = self.screen_rect.center
+		if msg == 'Play':
+			self.rect.center = self.screen_rect.center
+		elif msg == 'Easy':
+			self.rect.center = self.easy_width, self.easy_height
+		elif msg == 'Medium':
+			self.rect.center = self.screen_rect.center
+		elif msg == 'Hard':
+			self.rect.center = self.hard_width, self.hard_height
+
 
 		self._prep_msg(msg)
 

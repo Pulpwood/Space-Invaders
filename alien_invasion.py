@@ -30,7 +30,11 @@ class AlienInvasion:
 
 		self._create_fleet()
 
-		self.play_button = Button(self, "Play")
+		#self.play_button = Button(self, "Play")
+		#create difficulty buttons
+		self.easy_button = Button(self, "Easy")
+		self.mid_button = Button (self, "Medium")
+		self.hard_button = Button(self, "Hard")
 
 	def run_game(self):
 		"""Main loop of the game"""
@@ -55,13 +59,29 @@ class AlienInvasion:
 				self._check_keyup_events(event)
 			elif event.type == pygame.MOUSEBUTTONDOWN:
 				mouse_pos = pygame.mouse.get_pos()
-				self._check_play_button(mouse_pos)
+				#self._check_play_button(mouse_pos)
+				self._set_difficulty_level(mouse_pos)
 
-	def _check_play_button(self, mouse_pos):
-		button_clicked = self.play_button.rect.collidepoint(mouse_pos)
-		if button_clicked and not self.stats.game_active:
-			#reset settings for the next game
-			self.settings.initialize_dynamic_settings()
+	# def _check_play_button(self, mouse_pos):
+	# 	button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+	# 	#reset settings for the next game
+	# 	if button_clicked and not self.stats.game_active:
+
+	# 		self.settings.initialize_dynamic_settings()
+	# 		self._start_game()
+
+	def _set_difficulty_level(self, mouse_pos):
+		easy = self.easy_button.rect.collidepoint(mouse_pos)
+		medium = self.mid_button.rect.collidepoint(mouse_pos)
+		hard = self.hard_button.rect.collidepoint(mouse_pos)
+		if easy and not self.stats.game_active:
+			self.settings.initialize_dynamic_settings_easy()
+			self._start_game()
+		if medium and not self.stats.game_active:
+			self.settings.initialize_dynamic_settings_mid()
+			self._start_game()
+		if hard and not self.stats.game_active:
+			self.settings.initialize_dynamic_settings_hard()
 			self._start_game()
 
 	def _start_game(self):
@@ -211,7 +231,12 @@ class AlienInvasion:
 		self.aliens.draw(self.screen)
 
 		if not self.stats.game_active:
-			self.play_button.draw_button()
+			#self.play_button.draw_button()
+
+			self.easy_button.draw_button()
+			self.mid_button.draw_button()
+			self.hard_button.draw_button()
+
 
 		#Display last screen
 		pygame.display.flip()
