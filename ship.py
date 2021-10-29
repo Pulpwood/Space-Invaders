@@ -1,9 +1,11 @@
 import pygame
+from pygame.sprite import Sprite
 
-class Ship:
+class Ship(Sprite):
 	"""Class to manage the ship."""
 
 	def __init__(self, ai_game):
+		super().__init__()
 		#enable access to screen from main class
 		self.screen = ai_game.screen 
 		#enable settings

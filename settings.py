@@ -22,7 +22,8 @@ class Settings:
 		self.fleet_drop_speed = 7
 		#self.fleet_direction = 1
 
-		self.speedup_scale = 1.2
+		self.speedup_scale = 1.1
+		self.score_scale = 1.5
 
 		self.initialize_dynamic_settings()
 
@@ -31,24 +32,28 @@ class Settings:
 		self.bullet_speed = 3.0
 		self.alien_speed = 1.0
 		self.fleet_direction = 1
+		self.alien_points = 50
 
 	def initialize_dynamic_settings_easy(self):
 		self.ship_speed = 1.5
 		self.bullet_speed = 2.0
 		self.alien_speed = 0.33
 		self.fleet_direction = 1
+		self.alien_points = 50
 
 	def initialize_dynamic_settings_mid(self):
 		self.ship_speed = 1.5
 		self.bullet_speed = 3.0
 		self.alien_speed = 0.8
 		self.fleet_direction = 1
+		self.alien_points = 50
 
 	def initialize_dynamic_settings_hard(self):
 		self.ship_speed = 1.5
 		self.bullet_speed = 3.0
 		self.alien_speed = 1.3
 		self.fleet_direction = 1
+		self.alien_points = 50
 	#def initialize_dynamic_settings_changing_difficulty(self)
 
 	def increase_speed(self):
@@ -56,3 +61,4 @@ class Settings:
 		self.bullet_speed *= self.speedup_scale
 		self.alien_speed *= self.speedup_scale
 
+		self.alien_points = int(self.alien_points * self.score_scale)
