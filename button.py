@@ -15,7 +15,7 @@ class Button():
 		self.easy_width, self.easy_height = self.screen_rect.center[0] - self.width - self.interspace, self.screen_rect.center[1]
 		self.hard_width, self.hard_height = self.screen_rect.center[0] + self.width + self.interspace, self.screen_rect.center[1]
 
-		#Create button and adjust to mid
+		#Create buttons and adjust to mid
 		self.rect = pygame.Rect(0, 0, self.width, self.height)
 		if msg == 'Play':
 			self.rect.center = self.screen_rect.center

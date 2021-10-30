@@ -51,7 +51,7 @@ class AlienInvasion:
 			self._update_screen()
 
 	def _check_events(self):
-		"""Auxiliary method - Maintain events for mouse and keyboard."""
+		"""Maintain events for mouse and keyboard."""
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				if self.stats.high_score > self.stats.max_high_score:
@@ -68,6 +68,7 @@ class AlienInvasion:
 				#self._check_play_button(mouse_pos)
 				self._set_difficulty_level(mouse_pos)
 
+	#Launch play button
 	# def _check_play_button(self, mouse_pos):
 	# 	button_clicked = self.play_button.rect.collidepoint(mouse_pos)
 	# 	#reset settings for the next game
@@ -80,24 +81,20 @@ class AlienInvasion:
 		easy = self.easy_button.rect.collidepoint(mouse_pos)
 		medium = self.mid_button.rect.collidepoint(mouse_pos)
 		hard = self.hard_button.rect.collidepoint(mouse_pos)
-		if easy and not self.stats.game_active:
-			self.settings.initialize_dynamic_settings_easy()
-			self.sb.prep_score()
-			self.sb.prep_level()
-			self.sb.prep_ships()
-			self._start_game()
-		if medium and not self.stats.game_active:
-			self.settings.initialize_dynamic_settings_mid()
-			self.sb.prep_score()
-			self.sb.prep_level()
-			self.sb.prep_ships()
-			self._start_game()
-		if hard and not self.stats.game_active:
-			self.settings.initialize_dynamic_settings_hard()
-			self.sb.prep_score()
-			self.sb.prep_level()			
-			self.sb.prep_ships()
-			self._start_game()
+		if not self.stats.game_active:
+			if easy:
+				self.settings.initialize_dynamic_settings_easy()
+				self._prep_and_run_game()
+			elif medium:
+				self.settings.initialize_dynamic_settings_mid()
+				self._prep_and_run_game()
+			elif hard:
+				self.settings.initialize_dynamic_settings_hard()
+				self._prep_and_run_game()
+
+	def _prep_and_run_game(self):
+		self.sb.prep_images()
+		self._start_game()
 
 	def _start_game(self):
 		self.stats.reset_stats()
@@ -170,14 +167,17 @@ class AlienInvasion:
 			self.sb.prep_score()
 
 		if not self.aliens:
-			#Remove bullets and create the fleet
-			self.bullets.empty()
-			self._create_fleet()
-			self.settings.increase_speed()
+			self._start_new_level()
 
-			#Increment level
-			self.stats.level += 1
-			self.sb.prep_level()
+	def _start_new_level(self):
+		#Remove bullets and create the fleet
+		self.bullets.empty()
+		self._create_fleet()
+		self.settings.increase_speed()
+
+		#Increment level
+		self.stats.level += 1
+		self.sb.prep_level()
 
 	def _update_aliens(self):
 		"""Update position of aliens."""
