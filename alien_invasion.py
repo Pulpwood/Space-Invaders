@@ -54,7 +54,11 @@ class AlienInvasion:
 		"""Auxiliary method - Maintain events for mouse and keyboard."""
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
-				sys.exit()
+				if self.stats.high_score > self.stats.max_high_score:
+					filename = 'best_score.txt'
+					with open(filename, 'a') as file_object:
+						file_object.write(f"{self.stats.high_score}\n")	
+					sys.exit()
 			elif event.type == pygame.KEYDOWN:
 				self._check_keydown_events(event)
 			elif event.type == pygame.KEYUP:
@@ -118,6 +122,10 @@ class AlienInvasion:
 		elif event.key == pygame.K_LEFT:
 			self.ship.moving_left = True
 		elif event.key == pygame.K_q:
+			if self.stats.high_score > self.stats.max_high_score:
+				filename = 'best_score.txt'
+				with open(filename, 'a') as file_object:
+					file_object.write(f"{self.stats.high_score}\n")	
 			sys.exit()
 		elif event.key == pygame.K_DOWN:
 			self.ship.moving_down = True
