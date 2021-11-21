@@ -5,7 +5,7 @@ class Settings:
 		#Screen settings
 		self.screen_width = 1200
 		self.screen_height = 550
-		self.bg_color = (230,230,230)
+		self.bg_color = (247,247,247)
 
 		#self.ship_speed = 2.8
 		self.ship_limit = 2
@@ -42,14 +42,14 @@ class Settings:
 		self.alien_points = 50
 
 	def initialize_dynamic_settings_mid(self):
-		self.ship_speed = 1.5
+		self.ship_speed = 1.7
 		self.bullet_speed = 3.0
 		self.alien_speed = 0.8
 		self.fleet_direction = 1
 		self.alien_points = 50
 
 	def initialize_dynamic_settings_hard(self):
-		self.ship_speed = 1.5
+		self.ship_speed = 2.0
 		self.bullet_speed = 3.0
 		self.alien_speed = 1.3
 		self.fleet_direction = 1
